@@ -18,7 +18,7 @@ export async function POST(request: NextRequest) {
     
     console.log("🤖 Sending extracted text to Gemini API for structuring...");
     const { text: geminiResponse } = await generateText({
-      model: google("gemini-1.5-pro-latest"),
+      model: google("gemini-1.5-flash"),
       prompt: `Parse the following resume text and return a structured JSON object. The JSON should contain keys like "personalInfo", "professionalSummary", "experience", "education", "skills", "projects", and "certifications".
       
       Resume text:
@@ -29,10 +29,17 @@ export async function POST(request: NextRequest) {
       Return only the JSON object, without any surrounding text or markdown formatting.`,
     });
 
-    // **FIX:** Clean the response to remove markdown code fences before parsing.
-    const cleanedResponse = geminiResponse.replace(/^```json\n/, '').replace(/\n```$/, '');
+    // **IMPROVED FIX:** Find the JSON object within the response string.
+    const jsonStart = geminiResponse.indexOf('{');
+    const jsonEnd = geminiResponse.lastIndexOf('}');
 
-    const parsedData = JSON.parse(cleanedResponse);
+    if (jsonStart === -1 || jsonEnd === -1) {
+        throw new Error("Could not find a valid JSON object in the AI response.");
+    }
+    
+    const jsonString = geminiResponse.substring(jsonStart, jsonEnd + 1);
+
+    const parsedData = JSON.parse(jsonString);
     console.log("✅ Successfully received and parsed response from Gemini.");
 
     return NextResponse.json({
@@ -42,7 +49,6 @@ export async function POST(request: NextRequest) {
 
   } catch (error) {
     console.error("❌ Error in /api/process-resume-text:", error);
-    // Fallback to mock data if the API fails
     console.log("💡 Falling back to mock data due to API error.");
     const mockResumeData = {
         personalInfo: { name: "Alex Johnson (Mock Data)", email: "alex.johnson@example.com" },
