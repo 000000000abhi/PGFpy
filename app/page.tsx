@@ -36,11 +36,11 @@ export default function HomePage() {
   return (
     <div className="min-h-screen bg-white dark:bg-navy-950">
       {/* Database Status Banner */}
-      <div className="bg-gray-50 dark:bg-navy-900 border-b border-gray-200 dark:border-navy-700">
+      {/* <div className="bg-gray-50 dark:bg-navy-900 border-b border-gray-200 dark:border-navy-700">
         <div className="container mx-auto px-4 py-3">
           <DatabaseStatus showFullCard={false} />
         </div>
-      </div>
+      </div> */}
 
       {/* Hero Section */}
       <section className="relative overflow-hidden pt-20 pb-16">

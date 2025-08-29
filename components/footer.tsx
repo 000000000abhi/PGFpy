@@ -32,10 +32,10 @@ export default function Footer() {
   }
 
   const socialLinks = [
-    { name: "Twitter", icon: Twitter, href: "#" },
-    { name: "GitHub", icon: Github, href: "#" },
-    { name: "LinkedIn", icon: Linkedin, href: "#" },
-    { name: "Email", icon: Mail, href: "#" },
+    { name: "Twitter", icon: Twitter, href: "https://github.com/000000000abhi/" },
+    { name: "GitHub", icon: Github, href: "https://github.com/000000000abhi/" },
+    { name: "LinkedIn", icon: Linkedin, href: "https://www.linkedin.com/in/abhijeet-ansal-9993a3275/" },
+    { name: "Email", icon: Mail, href: "ak4492473@gmail.com" },
   ]
 
   return (
@@ -117,7 +117,7 @@ export default function Footer() {
           <div className="flex flex-col md:flex-row justify-between items-center">
             <p className="text-gray-600 dark:text-gray-300 text-sm">© 2024 PortfolioAI. All rights reserved.</p>
             <div className="flex items-center space-x-6 mt-4 md:mt-0">
-              <span className="text-gray-600 dark:text-gray-300 text-sm">Made with ❤️ for creators</span>
+              <span className="text-gray-600 dark:text-gray-300 text-sm">Made with ❤️ by Abhijeet</span>
             </div>
           </div>
         </div>
